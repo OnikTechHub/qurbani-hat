@@ -128,5 +128,31 @@
     "description": "This mini goat is small in size but healthy and well-maintained. It is raised with proper nutrition and care in a clean environment. Perfect for small families or limited space, and a budget-friendly option for Qurbani.",
     "image": "https://i.ibb.co/KpFbkt8X/Mini-Goat.jpg",
     "category": "Small Animal"
+  },
+  {
+    "id": 11,
+    "name": "Australian Cross Cow",
+    "type": "Cow",
+    "breed": "Australian Cross",
+    "price": 180000,
+    "weight": 350,
+    "age": 4,
+    "location": "Dinajpur",
+    "description": "This Australian cross cow is known for its strong build and excellent meat quality. Raised with premium feed and proper veterinary supervision, it is healthy, active, and suitable for large Qurbani arrangements.",
+    "image": "https://i.ibb.co/93gTqjtF/Australian-Cross-Cow.jpg",
+    "category": "Large Animal"
+  },
+  {
+    "id": 12,
+    "name": "Hybrid Goat",
+    "type": "Goat",
+    "breed": "Cross Breed",
+    "price": 45000,
+    "weight": 30,
+    "age": 2,
+    "location": "Jessore",
+    "description": "This hybrid goat combines the qualities of multiple breeds, offering good size, healthy growth, and quality meat. It is well-maintained, properly fed, and a great choice for medium-sized families during Qurbani.",
+    "image": "https://i.ibb.co/v6RktM65/Hybrid-Goat.jpg",
+    "category": "Small Animal"
   }
 ]
