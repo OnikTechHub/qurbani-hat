@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import AnimalCard from "@/components/AnimalCard";
+import QurbaniTips from "@/components/QurbaniTips";
 
 
 export default function Home() {
@@ -88,6 +89,7 @@ export default function Home() {
             See All Animals
           </Link>
         </div>
+        <div><QurbaniTips /></div>
       </section>
     </main>
   );
