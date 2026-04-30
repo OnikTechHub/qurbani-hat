@@ -2,14 +2,25 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import {  RiseLoader } from 'react-spinners';
+import { RiseLoader } from 'react-spinners';
 import { FaWeightHanging, FaCalendarAlt, FaMapMarkerAlt, FaTag } from 'react-icons/fa';
+import toast from 'react-hot-toast';
+import BookingModal from '@/components/BookingModal'; 
+
 
 const AnimalDetails = () => {
     const { id } = useParams();
     const router = useRouter();
     const [animal, setAnimal] = useState(null);
     const [loading, setLoading] = useState(true);
+
+
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        address: ''
+    });
 
     useEffect(() => {
         setLoading(true);
@@ -26,6 +37,16 @@ const AnimalDetails = () => {
             });
     }, [id, router]);
 
+
+    const handleBookingSubmit = (e) => {
+        e.preventDefault();
+        toast.success(`Successfully booked ${animal.name}!`);
+        setFormData({ name: '', email: '', phone: '', address: '' }); 
+        
+    
+        document.getElementById('booking_modal').close(); 
+    };
+
     if (loading) return (
         <div className="min-h-screen flex items-center justify-center">
             <RiseLoader color="#ea580c" />
@@ -34,10 +55,7 @@ const AnimalDetails = () => {
 
     return (
         <div className="container mx-auto py-12 px-4 min-h-screen">
-            
-
             <div className="flex flex-col lg:flex-row gap-12 bg-white p-4 md:p-10 shadow-xl rounded-[32px] border border-gray-100">
-
                 {/* Left Side Badge */}
 
                 <div className="flex-1 relative">
@@ -54,6 +72,7 @@ const AnimalDetails = () => {
                 </div>
 
                 {/* Right Side Detailed  */}
+
                 <div className="flex-1 flex flex-col justify-between py-2">
                     <div>
                         <h1 className="text-4xl md:text-5xl font-black text-gray-800 mb-4">{animal.name}</h1>
@@ -61,7 +80,6 @@ const AnimalDetails = () => {
                             {animal.description}
                         </p>
 
-                        {/* Grid */}
                         <div className="grid grid-cols-2 gap-6 bg-gray-50 p-8 rounded-2xl mb-8">
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-white rounded-xl shadow-sm text-orange-600"><FaTag /></div>
@@ -70,7 +88,6 @@ const AnimalDetails = () => {
                                     <p className="text-xl font-bold text-orange-600">৳{animal.price.toLocaleString()}</p>
                                 </div>
                             </div>
-
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-white rounded-xl shadow-sm text-orange-600"><FaWeightHanging /></div>
                                 <div>
@@ -78,7 +95,6 @@ const AnimalDetails = () => {
                                     <p className="text-xl font-bold text-gray-700">{animal.weight} kg</p>
                                 </div>
                             </div>
-
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-white rounded-xl shadow-sm text-orange-600"><FaCalendarAlt /></div>
                                 <div>
@@ -86,7 +102,6 @@ const AnimalDetails = () => {
                                     <p className="text-xl font-bold text-gray-700">{animal.age} Years</p>
                                 </div>
                             </div>
-
                             <div className="flex items-center gap-3">
                                 <div className="p-3 bg-white rounded-xl shadow-sm text-orange-600"><FaMapMarkerAlt /></div>
                                 <div>
@@ -99,7 +114,10 @@ const AnimalDetails = () => {
 
                     {/* Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <button className="btn btn-lg bg-orange-600 hover:bg-orange-700 text-white border-none flex-[2] shadow-xl shadow-orange-200">
+                        <button 
+                            onClick={() => document.getElementById('booking_modal').showModal()}
+                            className="btn btn-lg bg-orange-600 hover:bg-orange-700 text-white border-none flex-[2] shadow-xl shadow-orange-200"
+                        >
                             Book This Animal
                         </button>
                         <Link href="/animals" className="btn btn-lg btn-outline border-gray-300 flex-1 hover:bg-gray-100 hover:text-gray-800">
@@ -108,6 +126,16 @@ const AnimalDetails = () => {
                     </div>
                 </div>
             </div>
+
+            {/* BookingModal */}
+
+            <BookingModal 
+
+                animalName={animal.name}
+                formData={formData}
+                setFormData={setFormData}
+                handleBookingSubmit={handleBookingSubmit}
+            />
         </div>
     );
 };
