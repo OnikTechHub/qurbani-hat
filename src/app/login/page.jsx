@@ -2,9 +2,46 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { FaGoogle, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useForm } from 'react-hook-form';
+import { authClient } from '@/lib/auth-client';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
+
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm();
+
+    const handleLoginFunc = async (data) => {
+        console.log(data, "data");
+
+        const { data: res, error } = await authClient.signIn.email({
+            email: data.email, // required
+            password: data.password, // required
+            rememberMe: true,
+            callbackURL: "/",
+        });
+
+        if (error) {
+            toast.error(error.message || "Login failed!", {
+                autoClose: 6000, 
+            });
+        } 
+        else {
+            toast.success("Login Successful! Welcome back.", {
+                autoClose: 6000, 
+            });
+        }
+
+        console.log(res, error)
+
+
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
@@ -14,7 +51,7 @@ const LoginPage = () => {
                     <p className="text-gray-500 mt-2">Log in to manage your bookings</p>
                 </div>
 
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit(handleLoginFunc)} className="space-y-6">
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text font-semibold">Email Address</span>
@@ -23,11 +60,11 @@ const LoginPage = () => {
                             <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
                                 <FaEnvelope />
                             </span>
-                            <input 
-                                type="email" 
-                                placeholder="Enter your email address" 
-                                className="input input-bordered w-full pl-10 focus:border-orange-500 outline-none" 
-                                required 
+                            <input
+                                type="email"
+                                placeholder="Enter your email address"
+                                className="input input-bordered w-full pl-10 focus:border-orange-500 outline-none"
+                                {...register("email", { required: true })}
                             />
                         </div>
                     </div>
@@ -40,14 +77,14 @@ const LoginPage = () => {
                             <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
                                 <FaLock />
                             </span>
-                            <input 
-                                type={showPassword ? "text" : "password"} 
-                                placeholder="Enter your email password" 
-                                className="input input-bordered w-full pl-10 pr-10 focus:border-orange-500 outline-none" 
-                                required 
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter your password"
+                                className="input input-bordered w-full pl-10 pr-10 focus:border-orange-500 outline-none"
+                                {...register("password", { required: true })}
                             />
-                           
-                            <span 
+
+                            <span
                                 className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-gray-500 hover:text-orange-600 transition-colors"
                                 onClick={() => setShowPassword(!showPassword)}
                             >
@@ -56,7 +93,7 @@ const LoginPage = () => {
                         </div>
                     </div>
 
-                    <button className="btn bg-orange-600 hover:bg-orange-700 border-none text-white w-full text-lg shadow-lg">
+                    <button type="submit" className="btn bg-orange-600 hover:bg-orange-700 border-none text-white w-full text-lg shadow-lg">
                         Log In
                     </button>
                 </form>
