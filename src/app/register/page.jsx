@@ -1,11 +1,107 @@
-import React from 'react';
+"use client";
+import { useState } from 'react';
+import Link from 'next/link';
+import { FaGoogle, FaUser, FaEnvelope, FaLock, FaImage, FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const page = () => {
+const RegisterPage = () => {
+    const [showPassword, setShowPassword] = useState(false);
+
     return (
-        <div>
-            register
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
+            <div className="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 border border-gray-100 animate__animated animate__fadeInUp">
+                <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold text-gray-800">Create Account</h2>
+                    <p className="text-gray-500 mt-2">Join our Qurbani marketplace today</p>
+                </div>
+
+                <form className="space-y-4">
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">Full Name</span>
+                        </label>
+                        <div className="relative">
+                            <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                                <FaUser />
+                            </span>
+                            <input 
+                                type="text" 
+                                placeholder="Enter your name" 
+                                className="input input-bordered w-full pl-10 focus:border-orange-500 outline-none" 
+                                required 
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">Photo URL</span>
+                        </label>
+                        <div className="relative">
+                            <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                                <FaImage />
+                            </span>
+                            <input 
+                                type="text" 
+                                placeholder="Enter your name " 
+                                className="input input-bordered w-full pl-10 focus:border-orange-500 outline-none" 
+                                required 
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">Email Address</span>
+                        </label>
+                        <div className="relative">
+                            <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                                <FaEnvelope />
+                            </span>
+                            <input 
+                                type="email" 
+                                placeholder="Enter your email address" 
+                                className="input input-bordered w-full pl-10 focus:border-orange-500 outline-none" 
+                                required 
+                            />
+                        </div>
+                    </div>
+
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text font-semibold">Password</span>
+                        </label>
+                        <div className="relative">
+                            <span className="absolute inset-y-0 left-3 flex items-center text-gray-400">
+                                <FaLock />
+                            </span>
+                            <input 
+                                type={showPassword ? "text" : "password"} 
+                                placeholder="Enter your password" 
+                                className="input input-bordered w-full pl-10 pr-10 focus:border-orange-500 outline-none" 
+                                required 
+                            />
+                            <span 
+                                className="absolute inset-y-0 right-3 flex items-center cursor-pointer text-gray-500 hover:text-orange-600 transition-colors"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </span>
+                        </div>
+                    </div>
+
+                    <button className="btn bg-orange-600 hover:bg-orange-700 border-none text-white w-full text-lg shadow-lg mt-4">
+                        Sign Up
+                    </button>
+                </form>
+
+                <div className="divider my-6 text-gray-400 text-xs">ALREADY HAVE AN ACCOUNT?</div>
+
+                <Link href="/login" className="btn btn-outline w-full border-orange-600 text-orange-600 hover:bg-orange-600 hover:border-orange-600 font-bold">
+                    Log In to Your Account
+                </Link>
+            </div>
         </div>
     );
 };
 
-export default page;
+export default RegisterPage;
