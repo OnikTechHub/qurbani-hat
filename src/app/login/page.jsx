@@ -9,11 +9,9 @@ import toast from 'react-hot-toast';
 const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
 
-
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm();
 
@@ -21,26 +19,29 @@ const LoginPage = () => {
         console.log(data, "data");
 
         const { data: res, error } = await authClient.signIn.email({
-            email: data.email, // required
-            password: data.password, // required
+            email: data.email,
+            password: data.password,
             rememberMe: true,
             callbackURL: "/",
         });
 
         if (error) {
             toast.error(error.message || "Login failed!", {
-                autoClose: 6000, 
+                duration: 4000, 
             });
-        } 
-        else {
+        } else {
             toast.success("Login Successful! Welcome back.", {
-                autoClose: 6000, 
+                duration: 3000,
             });
         }
+        console.log(res, error);
+    };
 
-        console.log(res, error)
-
-
+    const handleGoogleSignin = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+        console.log(data, "data");
     };
 
     return (
@@ -100,7 +101,11 @@ const LoginPage = () => {
 
                 <div className="divider my-8 text-gray-400 text-sm uppercase tracking-wider">OR</div>
 
-                <button className="btn btn-outline w-full border-gray-300 hover:bg-gray-50 hover:text-gray-800 flex items-center justify-center gap-3">
+                
+                <button 
+                    onClick={handleGoogleSignin} 
+                    className="btn btn-outline w-full border-gray-300 hover:bg-gray-50 hover:text-gray-800 flex items-center justify-center gap-3"
+                >
                     <FaGoogle className="text-red-500 text-xl" />
                     Continue with Google
                 </button>
