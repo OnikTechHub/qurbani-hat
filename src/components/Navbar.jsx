@@ -1,14 +1,12 @@
 "use client";
-import Link from 'next/link';
 import { authClient } from '@/lib/auth-client';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
 
 const Navbar = () => {
     const pathname = usePathname();
     
     // Fetch user session data
-
     const { data: session } = authClient.useSession();
     const user = session?.user;
 
@@ -30,14 +28,6 @@ const Navbar = () => {
                     className={`font-medium ${isActive('/animals') ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600'}`}
                 >
                     All Animals
-                </Link>
-            </li>
-            <li>
-                <Link
-                    href="/profile"
-                    className={`font-medium ${isActive('/profile') ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600'}`}
-                >
-                    Profile
                 </Link>
             </li>
         </>
@@ -70,9 +60,8 @@ const Navbar = () => {
             <div className="navbar-end gap-1 md:gap-2">
                 {user ? (
                     <div className="flex items-center gap-2 md:gap-3">
-                        
-                        {/*  User Profile Image  */}
 
+                        {/*  User Profile Image  */}
                         <div className="avatar">
                             <div className="w-10 rounded-full ring ring-orange-500 ring-offset-base-100 ring-offset-2">
                                 <img 
@@ -83,15 +72,22 @@ const Navbar = () => {
                         </div>
 
                         {/*  User Name and Email */}
-
                         <div className="flex flex-col items-start">
                             <span className="text-sm font-bold text-gray-800 leading-none">{user.name}</span>
                             <span className="text-[10px] text-gray-500">{user.email}</span>
                         </div>
 
+                        {/* Profile Button  */}
                         
+                        <Link 
+                            href="/profile" 
+                            className="btn btn-xs sm:btn-sm btn-outline btn-neutral hidden sm:flex"
+                        >
+                            Profile
+                        </Link>
 
-                        {/* Logout Button  */}
+                        {/*  Logout Button  */}
+
                         <button 
                             onClick={async () => await authClient.signOut()}
                             className="btn btn-xs sm:btn-sm btn-outline btn-error hidden sm:flex"
@@ -99,10 +95,13 @@ const Navbar = () => {
                             Logout
                         </button>
 
-                        {/* Dropdown for Mobile Users  */}
+                        {/* Dropdown for Mobile Users */}
                         <div className="dropdown dropdown-end sm:hidden">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-xs"><button onClick={() => authClient.signOut()}>Logout</button></div>
-                            
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-xs">More</div>
+                            <ul tabIndex={0} className="mt-3 z-[100] p-2 shadow-xl menu menu-sm dropdown-content bg-base-100 rounded-box w-40 border">
+                                <li><Link href="/profile">Profile</Link></li>
+                                <li><button onClick={() => authClient.signOut()}>Logout</button></li>
+                            </ul>
                         </div>
                     </div>
                 ) : (
