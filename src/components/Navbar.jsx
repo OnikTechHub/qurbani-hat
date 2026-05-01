@@ -32,6 +32,14 @@ const Navbar = () => {
                     All Animals
                 </Link>
             </li>
+            <li>
+                <Link
+                    href="/profile"
+                    className={`font-medium ${isActive('/profile') ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:text-orange-600'}`}
+                >
+                    Profile
+                </Link>
+            </li>
         </>
     );
 
@@ -76,19 +84,12 @@ const Navbar = () => {
 
                         {/*  User Name and Email */}
 
-                        <div className="hidden lg:flex flex-col items-start">
+                        <div className="flex flex-col items-start">
                             <span className="text-sm font-bold text-gray-800 leading-none">{user.name}</span>
                             <span className="text-[10px] text-gray-500">{user.email}</span>
                         </div>
 
-                        {/*  Profile Button */}
-
-                        <Link 
-                            href="/profile" 
-                            className="btn btn-xs sm:btn-sm btn-outline btn-neutral hidden sm:flex"
-                        >
-                            Profile
-                        </Link>
+                        
 
                         {/* Logout Button  */}
                         <button 
@@ -100,11 +101,8 @@ const Navbar = () => {
 
                         {/* Dropdown for Mobile Users  */}
                         <div className="dropdown dropdown-end sm:hidden">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-xs">More</div>
-                            <ul tabIndex={0} className="mt-3 z-[100] p-2 shadow-xl menu menu-sm dropdown-content bg-base-100 rounded-box w-40 border">
-                                <li><Link href="/profile">Profile</Link></li>
-                                <li><button onClick={() => authClient.signOut()}>Logout</button></li>
-                            </ul>
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-xs"><button onClick={() => authClient.signOut()}>Logout</button></div>
+                            
                         </div>
                     </div>
                 ) : (
