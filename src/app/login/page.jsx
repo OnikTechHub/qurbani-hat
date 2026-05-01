@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import Link from 'next/link';
-import { FaGoogle, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaGoogle, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGithubSquare } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { authClient } from '@/lib/auth-client';
 import toast from 'react-hot-toast';
@@ -40,6 +40,12 @@ const LoginPage = () => {
     const handleGoogleSignin = async () => {
         const data = await authClient.signIn.social({
             provider: "google",
+        });
+        console.log(data, "data");
+    };
+    const handleGithubSignin = async () => {
+        const data = await authClient.signIn.social({
+            provider: "github",
         });
         console.log(data, "data");
     };
@@ -108,6 +114,14 @@ const LoginPage = () => {
                 >
                     <FaGoogle className="text-red-500 text-xl" />
                     Continue with Google
+                </button>
+                <br />
+                <button 
+                    onClick={handleGithubSignin} 
+                    className="btn btn-outline w-full border-gray-300 hover:bg-gray-50 hover:text-gray-800 flex items-center justify-center gap-3"
+                >
+                    <FaGithubSquare className="text-red-500 text-xl" />
+                    Continue with Github
                 </button>
 
                 <p className="text-center mt-8 text-gray-600">
