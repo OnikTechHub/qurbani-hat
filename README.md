@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🐄 QurbaniHat – Livestock Booking Platform
 
-## Getting Started
+**QurbaniHat** is a modern online livestock marketplace where users can browse, view details, and book cows or goats for the upcoming Qurbani. It is a fully responsive Single Page Application (SPA) designed for a smooth and user-friendly experience.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🔗 Live Links & Resources
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 🌐 Live Site: https://qurbani-hat-seven.vercel.app  
+- 💻 GitHub Repository: https://github.com/OnikTechHub/qurbani-hat
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Key Features
 
-## Learn More
+- 🔐 **Modern Authentication**  
+  Secure email/password login and Google social login using Better-Auth.
 
-To learn more about Next.js, take a look at the following resources:
+- 🐄 **Dynamic Animal Display**  
+  Users can sort livestock based on price (Sort by Price).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 🔒 **Private Routing**  
+  Animal details and profile pages are protected and only accessible after login.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 👤 **Profile Update (Challenge Feature)**  
+  Users can update their name and profile picture (via URL) directly.
 
-## Deploy on Vercel
+- 📅 **Booking System**  
+  Each animal has a dedicated booking form. Upon successful submission, a toast notification is displayed.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 📱 **Fully Responsive Design**  
+  Optimized for mobile, tablet, and desktop devices.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js (App Router), React.js  
+- **Styling:** Tailwind CSS, DaisyUI  
+- **Authentication:** Better-Auth  
+- **Database:** MongoDB  
+- **Animation:** Animate.css  
+- **Notifications:** React Toast  
+
+---
+
+## 📦 Main npm Packages
+
+- better-auth  
+- mongodb  
+- react-hot-toast  
+- Animate-css
+- react-icons  
+
+---
+
+## ⚙️ Environment Variables
+
+To run this project locally, create a `.env.local` file and add the following:
+
+```env
+BETTER_AUTH_SECRET=your_secret_key
+BETTER_AUTH_URL=http://localhost:3000
+MONGO_URI=your_mongodb_connection_string
+GOOGLE_CLIENT_ID=your_google_id
+GOOGLE_CLIENT_SECRET=your_google_secret
+GITHUB_CLIENT_ID=your_github_id
+GITHUB_CLIENT_SECRET=your_github_secret
